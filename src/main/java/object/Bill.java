@@ -23,6 +23,8 @@ public class Bill {
     private Client client;
 
     @ManyToMany(cascade = CascadeType.PERSIST)
+    @JoinTable(name = "bill-product", joinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"),
+            inverseJoinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"))
     private List<Products> productByBillList;
 
 

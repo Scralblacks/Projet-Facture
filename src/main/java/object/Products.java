@@ -18,7 +18,8 @@ public class Products {
     private Vat vat;
 
     @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "productByBillList")
-    @JoinTable(name = "bill-product", joinColumns = @JoinColumn(name = "id_Product"), inverseJoinColumns = @JoinColumn(name = "id_Bill"))
+//    @JoinTable(name = "bill-product", joinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"),
+//            inverseJoinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"))
     private List<Bill> billByProductList;
 
     public Products(){
@@ -29,6 +30,11 @@ public class Products {
         this.description = description;
         this.price_wto_taxes = price_wto_taxes;
         this.billByProductList = billByProductList;
+    }
+
+    public Products(String description, Float price_wto_taxes){
+        this.description = description;
+        this.price_wto_taxes = price_wto_taxes;
     }
 
     public void setId(String id) {

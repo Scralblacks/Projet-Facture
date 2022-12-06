@@ -1,17 +1,21 @@
-import object.Bill;
-import object.Client;
-import object.Products;
+import dao.VatDAO;
 
-import java.time.LocalDate;
-import java.util.*;
+import object.Vat;
+
 
 public class Main {
 
     public static void main(String[] args) {
 
-        Bill bill = new Bill(LocalDate.now(), 40000.30, 40400.30,
-                new Client("Jean Martin", "1 rue du Moulin", "60124", "Sinistrose-les-Mines", "01 20 90 56 91", "jean.martin@gmail.com")
-                );
+        VatDAO vatDAO = new VatDAO();
+
+        vatDAO.create(new Vat(0));
+        vatDAO.create(new Vat(0.022));
+        vatDAO.create(new Vat(0.055));
+        vatDAO.create(new Vat(0.1));
+        vatDAO.create(new Vat(0.2));
+
+
 
     }
 

@@ -11,7 +11,7 @@ public class Vat {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Float amount;
+    private double amount;
 
     @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "vat")
     private List<Products> productsList;
@@ -22,6 +22,15 @@ public class Vat {
 
     public Vat(){
 
+    }
+
+    public Vat(double amount, List<Products> productsList) {
+        this.amount = amount;
+        this.productsList = productsList;
+    }
+
+    public Vat(double amount) {
+        this.amount = amount;
     }
 
     public List<Products> getProductsList() {
@@ -36,11 +45,11 @@ public class Vat {
         return id;
     }
 
-    public Float getAmount() {
+    public double getAmount() {
         return amount;
     }
 
-    public void setAmount(Float amount) {
+    public void setAmount(double amount) {
         this.amount = amount;
     }
 }
