@@ -2,21 +2,30 @@ package object;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
-@Table(name = "bill-product", schema = "exercicejavase01", catalog = "")
-public class BillProduct {
+public class BillProduct implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "id_bill-product")
     private int idBillProduct;
+
     @Basic
     @Column(name = "Id_Bill")
-    private String idBill;
+    private Long idBill;
+
     @Basic
     @Column(name = "Id_Product")
-    private String idProduct;
+    private Long idProduct;
 
-    private int quantityProduct;
+    @Column(columnDefinition = "bigint default '0'")
+    private int quantityProduct = 0;
+
+    public BillProduct(){
+
+    }
+
     public int getIdBillProduct() {
         return idBillProduct;
     }
@@ -25,19 +34,19 @@ public class BillProduct {
         this.idBillProduct = idBillProduct;
     }
 
-    public String getIdBill() {
+    public Long getIdBill() {
         return idBill;
     }
 
-    public void setIdBill(String idBill) {
+    public void setIdBill(Long idBill) {
         this.idBill = idBill;
     }
 
-    public String getIdProduct() {
+    public Long getIdProduct() {
         return idProduct;
     }
 
-    public void setIdProduct(String idProduct) {
+    public void setIdProduct(Long idProduct) {
         this.idProduct = idProduct;
     }
 

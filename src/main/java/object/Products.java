@@ -30,7 +30,7 @@ public class Products {
     }
 
     public Products(String description, double price_wto_taxes, Vat vat, List<Bill> billByProductList){
-        this.ref_nbr = "P" + this.id;
+        this.ref_nbr = "P" + this.getId();
         this.description = description;
         this.price_wto_taxes = price_wto_taxes;
         this.vat = vat;
@@ -38,7 +38,7 @@ public class Products {
     }
 
     public Products(String description, double price_wto_taxes, Vat vat){
-        this.ref_nbr = "P" + this.id;
+        this.ref_nbr = "P" + this.getId();
         this.description = description;
         this.price_wto_taxes = price_wto_taxes;
         this.vat = vat;

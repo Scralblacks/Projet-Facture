@@ -23,10 +23,9 @@ public class Bill {
     private Client client;
 
     @ManyToMany
-    @JoinTable(name = "bill-product", joinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"),
+    @JoinTable(name = "billproduct", joinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"),
             inverseJoinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"))
     private List<Products> productByBillList;
-
 
     public Bill(){
 
@@ -42,7 +41,7 @@ public class Bill {
     }
 
     public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes, Client client){
-        this.ref_nbr = "B" + this.id;
+        this.ref_nbr = "B" + this.getId();
         this.date_of_creation = date_of_creation;
         this.cost_wto_taxes = cost_wto_taxes;
         this.cost_wt_taxes = cost_wt_taxes;
@@ -50,7 +49,7 @@ public class Bill {
     }
 
     public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes){
-        this.ref_nbr = "B" + this.id;
+        this.ref_nbr = "B" + this.getId();
         this.date_of_creation = date_of_creation;
         this.cost_wto_taxes = cost_wto_taxes;
         this.cost_wt_taxes = cost_wt_taxes;

@@ -33,7 +33,7 @@ public class Client {
     }
 
     public Client(String name, String address, String zip_code, String town, String phone_number, String email, List<Bill> billList) {
-        this.ref_num = "C" + this.id;
+        this.ref_num = "C" + this.getId();
         this.name = name;
         this.address = address;
         this.zip_code = zip_code;
@@ -43,7 +43,7 @@ public class Client {
         this.billList = billList;
     }
     public Client(String name, String address, String zip_code, String town, String phone_number, String email) {
-        this.ref_num = "C" + this.id;
+        this.ref_num = "C" + this.getId();
         this.name = name;
         this.address = address;
         this.zip_code = zip_code;
