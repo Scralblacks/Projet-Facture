@@ -2,13 +2,15 @@ package object;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.List;
 
 @Entity
 public class Client {
     @Id
-    private String id;
+    private Long id;
+
+    private String ref_num;
 
     private String name;
 
@@ -22,19 +24,31 @@ public class Client {
 
     private String email;
 
-    @OneToMany
-    private Collection<Bill> billList;
+    @OneToMany(cascade = CascadeType.PERSIST)
+    private List<Bill> billList;
 
     public Client(){
 
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
+    public Client(String name, String address, String zip_code, String town, String phone_number, String email, List<Bill> billList) {
+        this.ref_num = "C" + this.id;
+        this.name = name;
+        this.address = address;
+        this.zip_code = zip_code;
+        this.town = town;
+        this.phone_number = phone_number;
+        this.email = email;
+        this.billList = billList;
 
-    public String getId() {
-        return id;
+    }public Client(String name, String address, String zip_code, String town, String phone_number, String email) {
+        this.ref_num = "C" + this.id;
+        this.name = name;
+        this.address = address;
+        this.zip_code = zip_code;
+        this.town = town;
+        this.phone_number = phone_number;
+        this.email = email;
     }
 
     public String getName() {
@@ -85,11 +99,23 @@ public class Client {
         this.email = email;
     }
 
-    public Collection<Bill> getBillList() {
+    public List<Bill> getBillList() {
         return billList;
     }
 
-    public void setBillList(Collection<Bill> billList) {
+    public void setBillList(List<Bill> billList) {
         this.billList = billList;
+    }
+
+    public String getRef_num() {return ref_num;}
+
+    public void setRef_num(String ref_num) {this.ref_num = ref_num;}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }

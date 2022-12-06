@@ -2,6 +2,7 @@ package object;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -11,12 +12,12 @@ public class Products {
 
     private String description;
 
-    private Float price_wto_taxes;
+    private double price_wto_taxes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Vat vat;
 
-    @ManyToMany(mappedBy = "productByBillList")
+    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "productByBillList")
     @JoinTable(name = "bill-product", joinColumns = @JoinColumn(name = "id_Product"), inverseJoinColumns = @JoinColumn(name = "id_Bill"))
     private List<Bill> billByProductList;
 
@@ -46,11 +47,11 @@ public class Products {
         this.description = description;
     }
 
-    public Float getPrice_wto_taxes() {
+    public double getPrice_wto_taxes() {
         return price_wto_taxes;
     }
 
-    public void setPrice_wto_taxes(Float price_wto_taxes) {
+    public void setPrice_wto_taxes(double price_wto_taxes) {
         this.price_wto_taxes = price_wto_taxes;
     }
 

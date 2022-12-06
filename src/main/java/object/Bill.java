@@ -8,31 +8,51 @@ import java.util.List;
 @Entity
 public class Bill {
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String ref_nbr;
 
     private LocalDate date_of_creation;
 
-    private Float cost_wto_taxes;
+    private double cost_wto_taxes;
 
-    private Float cost_wt_taxes;
+    private double cost_wt_taxes;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private Client client;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Products> productByBillList;
+
 
     public Bill(){
 
     }
 
-    public void setId(String id) {
+    public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes, Client client, List<Products> productByBillList){
+        this.ref_nbr = "B" + this.id;
+        this.date_of_creation = date_of_creation;
+        this.cost_wto_taxes = cost_wto_taxes;
+        this.cost_wt_taxes = cost_wt_taxes;
+        this.client = client;
+        this.productByBillList = productByBillList;
+    }
+
+    public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes, Client client){
+        this.ref_nbr = "B" + this.id;
+        this.date_of_creation = date_of_creation;
+        this.cost_wto_taxes = cost_wto_taxes;
+        this.cost_wt_taxes = cost_wt_taxes;
+        this.client = client;
+    }
+
+    public void setId(Long id) {
         this.id = id;
         //this.id = String.valueOf(new StringBuilder("B").append(id));
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
@@ -44,19 +64,19 @@ public class Bill {
         this.date_of_creation = date_of_creation;
     }
 
-    public Float getCost_wto_taxes() {
+    public double getCost_wto_taxes() {
         return cost_wto_taxes;
     }
 
-    public void setCost_wto_taxes(Float cost_wto_taxes) {
+    public void setCost_wto_taxes(double cost_wto_taxes) {
         this.cost_wto_taxes = cost_wto_taxes;
     }
 
-    public Float getCost_wt_taxes() {
+    public double getCost_wt_taxes() {
         return cost_wt_taxes;
     }
 
-    public void setCost_wt_taxes(Float cost_wt_taxes) {
+    public void setCost_wt_taxes(double cost_wt_taxes) {
         this.cost_wt_taxes = cost_wt_taxes;
     }
 
@@ -80,4 +100,11 @@ public class Bill {
         return productByBillList;
     }
 
+    public String getRef_nbr() {
+        return ref_nbr;
+    }
+
+    public void setRef_nbr(String ref_nbr) {
+        this.ref_nbr = ref_nbr;
+    }
 }

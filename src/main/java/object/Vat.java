@@ -2,6 +2,7 @@ package object;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -12,8 +13,12 @@ public class Vat {
 
     private Float amount;
 
-    @OneToMany(mappedBy = "vat")
+    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "vat")
     private List<Products> productsList;
+
+    public void setProductsList(List<Products> productsList) {
+        this.productsList = productsList;
+    }
 
     public Vat(){
 
@@ -21,10 +26,6 @@ public class Vat {
 
     public List<Products> getProductsList() {
         return productsList;
-    }
-
-    public void setProductsList(List<Products> productsList) {
-        this.productsList = productsList;
     }
 
     public void setId(Long id) {
