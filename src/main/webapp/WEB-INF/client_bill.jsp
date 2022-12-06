@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1>Liste des produits</h1>
+<h1>Liste des clients</h1>
 
 <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
                    url="jdbc:mysql://localhost:3306/exercicejavase01"
@@ -46,7 +46,7 @@
       <td>
         <form method="get" action="${pageContext.request.contextPath}/clients/bills">
           <input type="hidden" value="${client.id}" name="idClient">
-          <button class="btn btn-details">Detail du client</button>
+          <button class="btn btn-details">Detail des factures</button>
         </form>
       </td>
     </tr>

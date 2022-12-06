@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<h1>Liste des produits</h1>
+<h1>Liste des clients</h1>
 
 <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
                    url="jdbc:mysql://localhost:3306/exercicejavase01"

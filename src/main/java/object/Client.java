@@ -25,7 +25,7 @@ public class Client {
 
     private String email;
 
-    @OneToMany
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     private List<Bill> billList;
 
     public Client(){

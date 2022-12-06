@@ -99,7 +99,7 @@ public class ClientDAO implements CrudDAO<Client>{
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            em.persist(element);
+            em.merge(element);
             et.commit();
         } catch (Exception e){
             e.getMessage();

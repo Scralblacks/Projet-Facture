@@ -24,8 +24,6 @@
   WHERE c.id = ${idClient}
 </sql:query>
 
-
-
 <table class="table table-bill ">
   <thread>
     <tr>

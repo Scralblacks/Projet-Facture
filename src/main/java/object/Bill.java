@@ -19,10 +19,10 @@ public class Bill {
     @Column(columnDefinition = "DECIMAL(19,2)")
     private double cost_wt_taxes;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     private Client client;
 
-    @ManyToMany
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
     @JoinTable(name = "billproduct", joinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"),
             inverseJoinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"))
     private List<Products> productByBillList;
