@@ -43,8 +43,9 @@
       <td>${client.phone_number}</td>
       <td>${client.email}</td>
       <td>
-        <form method="post">
-          <a href="">Obtenir les factures</a>
+        <form method="get" action="${pageContext.request.contextPath}/clients/bills">
+          <input type="hidden" value="${client.id}" name="idClient">
+          <button class="btn btn-details">Detail du client</button>
         </form>
       </td>
     </tr>

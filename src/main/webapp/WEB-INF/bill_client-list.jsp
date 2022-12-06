@@ -9,44 +9,50 @@
 </head>
 <body>
 
-<h1>Liste des produits</h1>
+<h1>Liste des factures</h1>
 
 <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
                    url="jdbc:mysql://localhost:3306/exercicejavase01"
                    user="root"  password=""/>
 
-<sql:query var="clients" dataSource="${db}">
-  SELECT * FROM client
-    WHERE id = ${idClient}
+<sql:query var="bills" dataSource="${db}">
+  SELECT * FROM bill b
+  INNER JOIN client_bill cb
+    ON b.id = cb.billlist_id
+  INNER JOIN client c
+    ON c.id = cb.client_id
+  WHERE c.id = ${idClient}
 </sql:query>
+
+
 
 <table class="table table-bill ">
   <thread>
     <tr>
       <th>Numéro de référence</th>
-      <th>Nom</th>
-      <th>Adresse</th>
-      <th>Ville</th>
-      <th>Code postal</th>
-      <th>n° de téléphone</th>
-      <th>email</th>
-      <th>Liste des factures</th>
+      <th>Coût hors taxe</th>
+      <th>Coût toutes taxe</th>
+      <th>Date de création</th>
+      <th>Client</th>
+      <th colspan="2">Détail</th>
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="client" items="${clients.rows}">
+  <c:forEach var="bill" items="${bills.rows}">
     <tr>
-      <td>${client.ref_nbr}</td>
-      <td>${client.name}</td>
-      <td>${client.address}</td>
-      <td>${client.town}</td>
-      <td>${client.zip_code}</td>
-      <td>${client.phone_number}</td>
-      <td>${client.email}</td>
+      <td>${bill.ref_nbr}</td>
+      <td>${bill.cost_wto_taxes}</td>
+      <td>${bill.cost_wt_taxes}</td>
+      <td>${bill.date_of_creation}</td>
       <td>
-        <form method="get" action="${pageContext.request.contextPath}/clients/bills">
-          <input type="hidden" value="${client.id}" name="idClient">
+        <form method="get" action="${pageContext.request.contextPath}/bills/client">
+          <input type="hidden" value="${bill.client_id}" name="idClient">
           <button class="btn btn-details">Detail du client</button>
+        </form>
+      </td>
+      <td>
+        <form method="post">
+          <a href="">Liste des produits</a>
         </form>
       </td>
     </tr>
