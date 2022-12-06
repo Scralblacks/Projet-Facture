@@ -13,7 +13,7 @@ public class Products {
 
     private String ref_nbr;
 
-    private String description;
+    private String name;
 
     private double price_wto_taxes;
 
@@ -29,17 +29,17 @@ public class Products {
 
     }
 
-    public Products(String description, double price_wto_taxes, Vat vat, List<Bill> billByProductList){
+    public Products(String name, double price_wto_taxes, Vat vat, List<Bill> billByProductList){
         this.ref_nbr = "P" + this.getId();
-        this.description = description;
+        this.name = name;
         this.price_wto_taxes = price_wto_taxes;
         this.vat = vat;
         this.billByProductList = billByProductList;
     }
 
-    public Products(String description, double price_wto_taxes, Vat vat){
+    public Products(String name, double price_wto_taxes, Vat vat){
         this.ref_nbr = "P" + this.getId();
-        this.description = description;
+        this.name = name;
         this.price_wto_taxes = price_wto_taxes;
         this.vat = vat;
     }
@@ -52,12 +52,12 @@ public class Products {
         return id;
     }
 
-    public String getDescription() {
-        return description;
+    public String getName() {
+        return name;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public double getPrice_wto_taxes() {
