@@ -20,7 +20,7 @@ public class BillProduct implements Serializable {
     private Long idProduct;
 
     @Column(columnDefinition = "bigint default '0'")
-    private int quantityProduct = 0;
+    private int quantityProduct;
 
     public BillProduct(){
 

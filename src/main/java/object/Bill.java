@@ -8,10 +8,8 @@ import java.util.List;
 @Entity
 public class Bill {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+       @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    private String ref_nbr;
 
     private LocalDate date_of_creation;
 
@@ -32,7 +30,6 @@ public class Bill {
     }
 
     public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes, Client client, List<Products> productByBillList){
-        this.ref_nbr = "B" + this.id;
         this.date_of_creation = date_of_creation;
         this.cost_wto_taxes = cost_wto_taxes;
         this.cost_wt_taxes = cost_wt_taxes;
@@ -41,7 +38,6 @@ public class Bill {
     }
 
     public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes, Client client){
-        this.ref_nbr = "B" + this.getId();
         this.date_of_creation = date_of_creation;
         this.cost_wto_taxes = cost_wto_taxes;
         this.cost_wt_taxes = cost_wt_taxes;
@@ -49,7 +45,6 @@ public class Bill {
     }
 
     public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes){
-        this.ref_nbr = "B" + this.getId();
         this.date_of_creation = date_of_creation;
         this.cost_wto_taxes = cost_wto_taxes;
         this.cost_wt_taxes = cost_wt_taxes;
@@ -57,7 +52,6 @@ public class Bill {
 
     public void setId(Long id) {
         this.id = id;
-        //this.id = String.valueOf(new StringBuilder("B").append(id));
     }
 
     public Long getId() {
@@ -106,13 +100,5 @@ public class Bill {
 
     public List<Products> getProductByBillList() {
         return productByBillList;
-    }
-
-    public String getRef_nbr() {
-        return ref_nbr;
-    }
-
-    public void setRef_nbr(String ref_nbr) {
-        this.ref_nbr = ref_nbr;
     }
 }
