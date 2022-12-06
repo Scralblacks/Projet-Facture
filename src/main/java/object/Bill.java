@@ -22,7 +22,7 @@ public class Bill {
     @ManyToOne(cascade = CascadeType.PERSIST)
     private Client client;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(name = "bill-product", joinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"),
             inverseJoinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"))
     private List<Products> productByBillList;
@@ -47,6 +47,13 @@ public class Bill {
         this.cost_wto_taxes = cost_wto_taxes;
         this.cost_wt_taxes = cost_wt_taxes;
         this.client = client;
+    }
+
+    public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes){
+        this.ref_nbr = "B" + this.id;
+        this.date_of_creation = date_of_creation;
+        this.cost_wto_taxes = cost_wto_taxes;
+        this.cost_wt_taxes = cost_wt_taxes;
     }
 
     public void setId(Long id) {

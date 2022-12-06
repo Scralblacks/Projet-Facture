@@ -8,6 +8,7 @@ import java.util.List;
 @Entity
 public class Client {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String ref_num;
@@ -24,7 +25,7 @@ public class Client {
 
     private String email;
 
-    @OneToMany(cascade = CascadeType.PERSIST)
+    @OneToMany
     private List<Bill> billList;
 
     public Client(){
@@ -40,8 +41,8 @@ public class Client {
         this.phone_number = phone_number;
         this.email = email;
         this.billList = billList;
-
-    }public Client(String name, String address, String zip_code, String town, String phone_number, String email) {
+    }
+    public Client(String name, String address, String zip_code, String town, String phone_number, String email) {
         this.ref_num = "C" + this.id;
         this.name = name;
         this.address = address;

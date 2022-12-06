@@ -13,7 +13,7 @@ public class Vat {
 
     private double amount;
 
-    @OneToMany(cascade = CascadeType.PERSIST, mappedBy = "vat")
+    @OneToMany(mappedBy = "vat")
     private List<Products> productsList;
 
     public void setProductsList(List<Products> productsList) {

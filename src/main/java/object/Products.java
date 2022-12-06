@@ -8,16 +8,19 @@ import java.util.List;
 @Entity
 public class Products {
     @Id
-    private String id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String ref_nbr;
 
     private String description;
 
     private double price_wto_taxes;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne
     private Vat vat;
 
-    @ManyToMany(cascade = CascadeType.PERSIST, mappedBy = "productByBillList")
+    @ManyToMany(mappedBy = "productByBillList")
 //    @JoinTable(name = "bill-product", joinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"),
 //            inverseJoinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"))
     private List<Bill> billByProductList;
@@ -26,22 +29,26 @@ public class Products {
 
     }
 
-    public Products(String description, Float price_wto_taxes, List<Bill> billByProductList){
+    public Products(String description, double price_wto_taxes, Vat vat, List<Bill> billByProductList){
+        this.ref_nbr = "P" + this.id;
         this.description = description;
         this.price_wto_taxes = price_wto_taxes;
+        this.vat = vat;
         this.billByProductList = billByProductList;
     }
 
-    public Products(String description, Float price_wto_taxes){
+    public Products(String description, double price_wto_taxes, Vat vat){
+        this.ref_nbr = "P" + this.id;
         this.description = description;
         this.price_wto_taxes = price_wto_taxes;
+        this.vat = vat;
     }
 
-    public void setId(String id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public String getId() {
+    public Long getId() {
         return id;
     }
 
