@@ -8,13 +8,15 @@ import java.util.List;
 @Entity
 public class Bill {
     @Id
-       @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private LocalDate date_of_creation;
 
+    @Column(columnDefinition = "DECIMAL(19,2)")
     private double cost_wto_taxes;
 
+    @Column(columnDefinition = "DECIMAL(19,2)")
     private double cost_wt_taxes;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
