@@ -52,10 +52,6 @@ public class Main {
         productsDAO.create(lait);
         billDAO.create(bill1);
 
-
-
-
-
     }
 
 }
