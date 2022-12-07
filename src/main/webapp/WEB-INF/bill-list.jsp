@@ -26,7 +26,6 @@
       <th>Coût hors taxe</th>
       <th>Coût toutes taxe</th>
       <th>Date de création</th>
-      <th>Client</th>
       <th colspan="4">Action</th>
     </tr>
   </thread>
@@ -67,8 +66,8 @@
 </table>
 
 <p>
-  <a href="${pageContext.request.contextPath}/bills">Returner sur la liste des factures</a>
-  <a href="${pageContext.request.contextPath}/clients">Aller vers la liste des client</a>
+  <a href="${pageContext.request.contextPath}/clients">Aller vers la liste des clients</a>
+  <a href="${pageContext.request.contextPath}/products">Aller vers la liste des produits</a>
 </p>
 
 <form method="get" action="${pageContext.request.contextPath}/bills/add">

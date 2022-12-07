@@ -16,7 +16,9 @@
                    user="root"  password=""/>
 
 <sql:query var="clients" dataSource="${db}">
-  SELECT * FROM client
+  SELECT * FROM client c
+  INNER JOIN bill b
+    ON b.id_client = c.id
 </sql:query>
 
 <table class="table table-client ">
@@ -29,7 +31,7 @@
       <th>Code postal</th>
       <th>n° de téléphone</th>
       <th>email</th>
-      <th>Liste des factures</th>
+      <th colspan="3">Action</th>
     </tr>
   </thread>
   <tbody>
@@ -44,8 +46,20 @@
       <td>${client.email}</td>
       <td>
         <form method="get" action="${pageContext.request.contextPath}/clients/bills">
-          <input type="hidden" value="${client.id}" name="idClient">
+          <input type="hidden" value="${client.b.id}" name="idClient">
           <button class="btn btn-details">Liste des factures</button>
+        </form>
+      </td>
+      <td>
+        <form method="post" action="${pageContext.request.contextPath}/clients/update">
+          <input type="hidden" value="${client.id}" name="idClient">
+          <button class="btn btn-details">Éditer le(la) client(e)</button>
+        </form>
+      </td>
+      <td>
+        <form method="post" action="${pageContext.request.contextPath}/clients/delete">
+          <input type="hidden" value="${client.id}" name="idClient">
+          <button class="btn btn-details">Supprimer le(la) client(e)</button>
         </form>
       </td>
     </tr>
@@ -53,7 +67,14 @@
   </tbody>
 </table>
 
-<%--<a class="btn btn-add" href="${pageContext.request.contextPath}/bills/add">Add Bill</a>--%>
+<p>
+  <a href="${pageContext.request.contextPath}/bills">Aller vers la liste des factures</a>
+  <a href="${pageContext.request.contextPath}/products">Aller vers la liste des produit</a>
+</p>
+
+<form method="get" action="${pageContext.request.contextPath}/client/add">
+  <button class="btn btn-details">Ajouter un client</button>
+</form>
 
 </body>
 </html>
