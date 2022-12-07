@@ -44,8 +44,9 @@
       <td>${product.price_wto_taxes}</td>
       <td>${product.amount}</td>
       <td>
-        <form method="post">
-          <a href="">Factures liée</a>
+        <form method="get" action="${pageContext.request.contextPath}/products/bills">
+          <input type="hidden" value="${product.id}" name="idProduct">
+          <button class="btn btn-details">Liste des Factures</button>
         </form>
       </td>
     </tr>
