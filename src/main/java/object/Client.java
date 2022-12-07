@@ -26,6 +26,8 @@ public class Client {
 
     private String email;
 
+    private boolean isNotCalledYet;
+
     @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.DETACH}, mappedBy = "client", fetch = FetchType.EAGER)
     private List<Bill> billList;
 
@@ -42,6 +44,7 @@ public class Client {
         this.phone_number = phone_number;
         this.email = email;
         this.billList = billList;
+        this.isNotCalledYet = true;
     }
     public Client(String name, String address, String zip_code, String town, String phone_number, String email) {
         this.ref_num = "C" + this.getId();
@@ -51,6 +54,7 @@ public class Client {
         this.town = town;
         this.phone_number = phone_number;
         this.email = email;
+        this.isNotCalledYet = true;
     }
 
     public String getName() {
@@ -119,5 +123,13 @@ public class Client {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public boolean getIsNotCalledYet() {
+        return isNotCalledYet;
+    }
+
+    public void setIsNotCalledYet(boolean notCalledYet) {
+        isNotCalledYet = notCalledYet;
     }
 }

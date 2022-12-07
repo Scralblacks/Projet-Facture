@@ -25,7 +25,6 @@
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="bill" items="${client.billList}">
     <tr>
 <%--      <td>${client.ref_nbr}</td>--%>
       <td>${client.name}</td>
@@ -53,7 +52,7 @@
         </form>
       </td>
     </tr>
-  </c:forEach>
+      <c:set var="client.isNotCalledYet" value="false"></c:set>
   </tbody>
 </table>
 

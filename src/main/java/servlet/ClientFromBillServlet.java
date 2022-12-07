@@ -22,6 +22,10 @@ public class ClientFromBillServlet extends HttpServlet {
 
         ClientDAO clientDAO = new ClientDAO();
 
+        Client client = clientDAO.findById(Long.parseLong(req.getParameter("idClient"))).get();
+
+        System.out.println(client.getIsNotCalledYet());
+
         req.setAttribute("client", clientDAO.findById(Long.parseLong(req.getParameter("idClient"))).get());
 
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/client_bill.jsp");
