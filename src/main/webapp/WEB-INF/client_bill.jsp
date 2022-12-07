@@ -52,7 +52,6 @@
         </form>
       </td>
     </tr>
-      <c:set var="client.isNotCalledYet" value="false"></c:set>
   </tbody>
 </table>
 
