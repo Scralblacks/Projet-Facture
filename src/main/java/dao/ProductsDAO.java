@@ -53,6 +53,26 @@ public class ProductsDAO implements CrudDAO<Products> {
         return Optional.empty();
     }
 
+    public List<Products> findByName(String name) {
+        List<Products> result = null;
+        EntityManagerFactory emf = PersistantManager.getFactoryInstance();
+        EntityManager em = emf.createEntityManager();
+        EntityTransaction et = em.getTransaction();
+        try {
+            et.begin();
+            TypedQuery<Products> query = em.createQuery("SELECT p FROM Products p WHERE p.name = ?1", Products.class);
+            result = query.setParameter(1, name).getResultList();
+            et.commit();
+        } catch (Exception e){
+            if (et.isActive()){
+                et.rollback();
+            }
+        } finally {
+            em.close();
+        }
+        return result;
+    }
+
     @Override
     public boolean delete(Long id) {
         EntityManagerFactory emf = PersistantManager.getFactoryInstance();

@@ -9,43 +9,43 @@
 </head>
 <body>
 
-<h1>Liste des clients</h1>
+<h1>Liste des produits</h1>
 
 <sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
                    url="jdbc:mysql://localhost:3306/exercicejavase01"
                    user="root"  password=""/>
 
-<sql:query var="clients" dataSource="${db}">
-  SELECT * FROM client
+<sql:query var="products" dataSource="${db}">
+  SELECT * FROM products p
+  INNER JOIN vat v
+    ON v.id = p.vat_id
+  INNER JOIN billproduct bp
+    ON p.id = bp.id_product
+  INNER JOIN bill b
+    ON bp.id_bill = b.id
+    WHERE b.id = ${idBill}
 </sql:query>
 
-<table class="table table-client ">
+<table class="table table-product ">
   <thread>
     <tr>
       <th>Numéro de référence</th>
       <th>Nom</th>
-      <th>Adresse</th>
-      <th>Ville</th>
-      <th>Code postal</th>
-      <th>n° de téléphone</th>
-      <th>email</th>
+      <th>Coût hors taxe</th>
+      <th>Taxation</th>
       <th>Liste des factures</th>
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="client" items="${clients.rows}">
+  <c:forEach var="product" items="${products.rows}">
     <tr>
-      <td>${client.ref_nbr}</td>
-      <td>${client.name}</td>
-      <td>${client.address}</td>
-      <td>${client.town}</td>
-      <td>${client.zip_code}</td>
-      <td>${client.phone_number}</td>
-      <td>${client.email}</td>
+      <td>${product.ref_nbr}</td>
+      <td>${product.name}</td>
+      <td>${product.price_wto_taxes}</td>
+      <td>${product.amount}</td>
       <td>
-        <form method="get" action="${pageContext.request.contextPath}/clients/bills">
-          <input type="hidden" value="${client.id}" name="idClient">
-          <button class="btn btn-details">Liste des factures</button>
+        <form method="post">
+          <a href="">Factures liée</a>
         </form>
       </td>
     </tr>

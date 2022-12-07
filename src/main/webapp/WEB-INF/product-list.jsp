@@ -21,7 +21,7 @@
     ON v.id = p.vat_id
 </sql:query>
 
-<table class="table table-bill ">
+<table class="table table-product ">
   <thread>
     <tr>
       <th>Numéro de référence</th>

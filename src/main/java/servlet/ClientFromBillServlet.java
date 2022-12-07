@@ -17,10 +17,6 @@ public class ClientFromBillServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("COUCOU !");
-
-        System.out.println(req.getParameter("idClient"));
-
         req.setAttribute("idClient", req.getParameter("idClient"));
 
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/client_bill.jsp");

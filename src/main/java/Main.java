@@ -51,7 +51,10 @@ public class Main {
         listBillJeanMartin.add(bill1);
         listBillJeanMartin.add(bill3);
 
+        listBillJeanneMartin.add(bill2);
+
         listProductsBill1.add(lait);
+        listProductsBill1.add(chocolat);
 
         listProductsBill2.add(lait);
 
@@ -61,11 +64,6 @@ public class Main {
         listBillLait.add(bill2);
 
         listBillChocolat.add(bill3);
-
-        listBillJeanneMartin.add(bill2);
-
-
-
 
         //Bloc completing objects
         jeanMartin.setBillList(listBillJeanMartin);
@@ -84,12 +82,12 @@ public class Main {
         clientDAO.create(jeanMartin);
         clientDAO.create(jeanneMartin);
 
-        productsDAO.create(lait);
-        productsDAO.create(chocolat);
-
-        billDAO.create(bill1);
-        billDAO.create(bill2);
-        billDAO.create(bill3);
+//        productsDAO.create(lait);
+//        productsDAO.create(chocolat);
+//
+//        billDAO.create(bill1);
+//        billDAO.create(bill2);
+//        billDAO.create(bill3);
 
     }
 

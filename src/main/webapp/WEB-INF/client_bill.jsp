@@ -20,7 +20,7 @@
     WHERE id = ${idClient}
 </sql:query>
 
-<table class="table table-bill ">
+<table class="table table-client_bill ">
   <thread>
     <tr>
       <th>Numéro de référence</th>
@@ -53,6 +53,9 @@
   </c:forEach>
   </tbody>
 </table>
+
+<a href="${pageContext.request.contextPath}/clients">Returner sur la liste des client</a>
+<a href="${pageContext.request.contextPath}/bills">Aller vers la liste des factures</a>
 
 <%--<a class="btn btn-add" href="${pageContext.request.contextPath}/bills/add">Add Bill</a>--%>
 

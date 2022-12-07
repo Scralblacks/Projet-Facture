@@ -46,8 +46,9 @@
         </form>
       </td>
       <td>
-        <form method="post">
-          <a href="">Liste des produits</a>
+        <form method="get" action="${pageContext.request.contextPath}/bills/products">
+          <input type="hidden" value="${bill.id}" name="idBill">
+          <button class="btn btn-details">Liste des produits</button>
         </form>
       </td>
     </tr>

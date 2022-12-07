@@ -20,9 +20,7 @@ public class Products {
     @ManyToOne
     private Vat vat;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, mappedBy = "productByBillList")
-//    @JoinTable(name = "bill-product", joinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"),
-//            inverseJoinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"))
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH}, mappedBy = "productByBillList")
     private List<Bill> billByProductList;
 
     public Products(){

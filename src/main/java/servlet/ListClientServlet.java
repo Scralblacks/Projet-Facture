@@ -16,8 +16,6 @@ public class ListClientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("COUCOU !");
-
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/client-list.jsp");
         rd.forward(req, resp);
 

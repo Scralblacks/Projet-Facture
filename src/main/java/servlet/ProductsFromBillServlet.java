@@ -9,17 +9,17 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-@WebServlet(urlPatterns = "/clients/bills")
-public class BillsFromClientServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/bills/products")
+public class ProductsFromBillServlet extends HttpServlet {
 
-    public static final String URL = "/clients/bills";
+    public static final String URL = "/bills/products";
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        req.setAttribute("idClient", req.getParameter("idClient"));
+        req.setAttribute("idBill", req.getParameter("idBill"));
 
-        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/bill_client-list.jsp");
+        RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/product_bill-list.jsp");
         rd.forward(req, resp);
     }
 }

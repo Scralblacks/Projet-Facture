@@ -3,6 +3,7 @@ package object;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -19,10 +20,10 @@ public class Bill {
     @Column(columnDefinition = "DECIMAL(19,2)")
     private double cost_wt_taxes;
 
-    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
     private Client client;
 
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH})
     @JoinTable(name = "billproduct", joinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"),
             inverseJoinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"))
     private List<Products> productByBillList;

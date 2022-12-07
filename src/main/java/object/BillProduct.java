@@ -26,6 +26,12 @@ public class BillProduct implements Serializable {
 
     }
 
+    public BillProduct(Long idBill, Long idProduct, int quantityProduct) {
+        this.idBill = idBill;
+        this.idProduct = idProduct;
+        this.quantityProduct = quantityProduct;
+    }
+
     public int getIdBillProduct() {
         return idBillProduct;
     }

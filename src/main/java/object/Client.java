@@ -2,6 +2,7 @@ package object;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public class Client {
 
     private String email;
 
-    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH}, mappedBy = "client")
     private List<Bill> billList;
 
     public Client(){

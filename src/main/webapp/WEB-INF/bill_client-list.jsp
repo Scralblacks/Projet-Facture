@@ -17,14 +17,12 @@
 
 <sql:query var="bills" dataSource="${db}">
   SELECT * FROM bill b
-  INNER JOIN client_bill cb
-    ON b.id = cb.billlist_id
   INNER JOIN client c
-    ON c.id = cb.client_id
+    ON c.id = b.client_id
   WHERE c.id = ${idClient}
 </sql:query>
 
-<table class="table table-bill ">
+<table class="table table-bill_client ">
   <thread>
     <tr>
       <th>Numéro de référence</th>
@@ -49,14 +47,18 @@
         </form>
       </td>
       <td>
-        <form method="post">
-          <a href="">Liste des produits</a>
+        <form method="get" action="${pageContext.request.contextPath}/bills/products">
+          <input type="hidden" value="${bill.id}" name="idBill">
+          <button class="btn btn-details">Liste des produits</button>
         </form>
       </td>
     </tr>
   </c:forEach>
   </tbody>
 </table>
+
+<a href="${pageContext.request.contextPath}/bills">Returner sur la liste des factures</a>
+<a href="${pageContext.request.contextPath}/clients">Aller vers la liste des client</a>
 
 <%--<a class="btn btn-add" href="${pageContext.request.contextPath}/bills/add">Add Bill</a>--%>
 
