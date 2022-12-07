@@ -42,6 +42,7 @@
       <td>${product.ref_nbr}</td>
       <td>${product.name}</td>
       <td>${product.price_wto_taxes}</td>
+      <td>${product.quantityProduct}</td>
       <td>${product.amount}</td>
       <td>
         <form method="get" action="${pageContext.request.contextPath}/products/bills">

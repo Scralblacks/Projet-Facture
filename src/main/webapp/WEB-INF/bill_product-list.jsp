@@ -26,9 +26,7 @@
   WHERE P.id = ${idProduct}
 </sql:query>
 
-
-
-<table class="table table-bill ">
+<table class="table table-bill table-bill_client ">
   <thread>
     <tr>
       <th>Numéro de référence</th>
@@ -36,7 +34,7 @@
       <th>Coût toutes taxe</th>
       <th>Date de création</th>
       <th>Client</th>
-      <th colspan="2">Détail</th>
+      <th colspan="4">Action</th>
     </tr>
   </thread>
   <tbody>
@@ -58,12 +56,31 @@
           <button class="btn btn-details">Liste des produits</button>
         </form>
       </td>
+      <td>
+        <form method="post" action="${pageContext.request.contextPath}/bills/update">
+          <input type="hidden" value="${bill.id}" name="idBill">
+          <button class="btn btn-details">Éditer la facture</button>
+        </form>
+      </td>
+      <td>
+        <form method="post" action="${pageContext.request.contextPath}/bills/delete">
+          <input type="hidden" value="${bill.id}" name="idBill">
+          <button class="btn btn-details">Supprimer la facture</button>
+        </form>
+      </td>
     </tr>
   </c:forEach>
   </tbody>
 </table>
 
-<%--<a class="btn btn-add" href="${pageContext.request.contextPath}/bills/add">Add Bill</a>--%>
+<p>
+  <a href="${pageContext.request.contextPath}/bills">Returner sur la liste des factures</a>
+  <a href="${pageContext.request.contextPath}/clients">Aller vers la liste des client</a>
+</p>
+
+<form method="get" action="${pageContext.request.contextPath}/bills/add">
+  <button class="btn btn-details">Ajouter une facture</button>
+</form>
 
 </body>
 </html>
