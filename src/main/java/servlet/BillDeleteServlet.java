@@ -14,14 +14,6 @@ public class BillDeleteServlet extends HttpServlet {
 
     public static final String URL = "/bills/delete";
 
-//    @Override
-//    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//
-//        getServletContext()
-//                .getRequestDispatcher("/WEB-INF/del-game.jsp")
-//                .forward(req, resp);
-//    }
-
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 

@@ -20,7 +20,7 @@ public class Products {
     @ManyToOne
     private Vat vat;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH}, mappedBy = "productByBillList")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE}, mappedBy = "productByBillList")
     private List<Bill> billByProductList;
 
     public Products(){

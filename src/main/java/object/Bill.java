@@ -23,7 +23,7 @@ public class Bill {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
     private Client client;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE})
     @JoinTable(name = "billproduct", joinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"),
             inverseJoinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"))
     private List<Products> productByBillList;

@@ -28,7 +28,7 @@
       <th>Nom</th>
       <th>Coût hors taxe</th>
       <th>Taxation</th>
-      <th>Liste des factures</th>
+      <th colspan="3">Action</th>
     </tr>
   </thread>
   <tbody>
@@ -44,12 +44,31 @@
           <button class="btn btn-details">Liste des Factures</button>
         </form>
       </td>
+      <td>
+        <form method="post" action="${pageContext.request.contextPath}/products/update">
+          <input type="hidden" value="${product.id}" name="idProduct">
+          <button class="btn btn-details">Éditer le produit</button>
+        </form>
+      </td>
+      <td>
+        <form method="post" action="${pageContext.request.contextPath}/products/delete">
+          <input type="hidden" value="${product.id}" name="idProduct">
+          <button class="btn btn-details">Supprimer le produit</button>
+        </form>
+      </td>
     </tr>
   </c:forEach>
   </tbody>
 </table>
 
-<%--<a class="btn btn-add" href="${pageContext.request.contextPath}/bills/add">Add Bill</a>--%>
+<p>
+  <a href="${pageContext.request.contextPath}/clients">Aller vers la liste des client</a>
+  <a href="${pageContext.request.contextPath}/bills">Aller vers la liste des factures</a>
+</p>
+
+<form method="get" action="${pageContext.request.contextPath}/products/add">
+  <button class="btn btn-details">Ajouter un produit</button>
+</form>
 
 </body>
 </html>

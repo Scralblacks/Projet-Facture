@@ -55,7 +55,16 @@
   </tbody>
 </table>
 
-<%--<a class="btn btn-add" href="${pageContext.request.contextPath}/bills/add">Add Bill</a>--%>
+<p>
+  <a href="${pageContext.request.contextPath}/products">Retourner à la liste des produits</a>
+  <a href="${pageContext.request.contextPath}/clients">Aller vers la liste des client</a>
+  <a href="${pageContext.request.contextPath}/bills">Aller vers la liste des factures</a>
+</p>
+
+<form method="get" action="${pageContext.request.contextPath}/products/add">
+  <button class="btn btn-details">Ajouter un produit</button>
+</form>
+
 
 </body>
 </html>
