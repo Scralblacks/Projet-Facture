@@ -15,21 +15,10 @@
                    url="jdbc:mysql://localhost:3306/exercicejavase01"
                    user="root"  password=""/>
 
-<sql:query var="bills" dataSource="${db}">
-  SELECT * FROM products p
-  INNER JOIN vat v
-  ON v.id = p.vat_id
-  INNER JOIN billproduct bp
-  ON p.id = bp.id_product
-  INNER JOIN bill b
-  ON bp.id_bill = b.id
-  WHERE P.id = ${idProduct}
-</sql:query>
-
 <table class="table table-bill table-bill_client ">
   <thread>
     <tr>
-      <th>Numéro de référence</th>
+<%--      <th>Numéro de référence</th>--%>
       <th>Coût hors taxe</th>
       <th>Coût toutes taxe</th>
       <th>Date de création</th>
@@ -38,37 +27,41 @@
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="bill" items="${bills.rows}">
-    <tr>
-      <td>${bill.ref_nbr}</td>
-      <td>${bill.cost_wto_taxes}</td>
-      <td>${bill.cost_wt_taxes}</td>
-      <td>${bill.date_of_creation}</td>
-      <td>
-        <form method="get" action="${pageContext.request.contextPath}/bills/client">
-          <input type="hidden" value="${bill.client_id}" name="idClient">
-          <button class="btn btn-details">Detail du client</button>
-        </form>
-      </td>
-      <td>
-        <form method="get" action="${pageContext.request.contextPath}/bills/products">
-          <input type="hidden" value="${bill.id}" name="idBill">
-          <button class="btn btn-details">Liste des produits</button>
-        </form>
-      </td>
-      <td>
-        <form method="post" action="${pageContext.request.contextPath}/bills/update">
-          <input type="hidden" value="${bill.id}" name="idBill">
-          <button class="btn btn-details">Éditer la facture</button>
-        </form>
-      </td>
-      <td>
-        <form method="post" action="${pageContext.request.contextPath}/bills/delete">
-          <input type="hidden" value="${bill.id}" name="idBill">
-          <button class="btn btn-details">Supprimer la facture</button>
-        </form>
-      </td>
-    </tr>
+  <c:forEach var="bill" items="${bills}">
+    <c:forEach var="product" items="${bill.productByBillList}">
+    <c:if test="${product.id == idProduct}">
+        <tr>
+          <td>${bill.ref_num}</td>
+          <td>${bill.cost_wto_taxes}</td>
+          <td>${bill.cost_wt_taxes}</td>
+          <td>${bill.date_of_creation}</td>
+          <td>
+            <form method="get" action="${pageContext.request.contextPath}/bills/client">
+              <input type="hidden" value="${bill.client.id}" name="idClient">
+              <button class="btn btn-details">Detail du client</button>
+            </form>
+          </td>
+          <td>
+            <form method="get" action="${pageContext.request.contextPath}/bills/products">
+              <input type="hidden" value="${bill.id}" name="idBill">
+              <button class="btn btn-details">Liste des produits</button>
+            </form>
+          </td>
+          <td>
+            <form method="post" action="${pageContext.request.contextPath}/bills/update">
+              <input type="hidden" value="${bill.id}" name="idBill">
+              <button class="btn btn-details">Éditer la facture</button>
+            </form>
+          </td>
+          <td>
+            <form method="post" action="${pageContext.request.contextPath}/bills/delete">
+              <input type="hidden" value="${bill.id}" name="idBill">
+              <button class="btn btn-details">Supprimer la facture</button>
+            </form>
+          </td>
+        </tr>
+      </c:if>
+    </c:forEach>
   </c:forEach>
   </tbody>
 </table>

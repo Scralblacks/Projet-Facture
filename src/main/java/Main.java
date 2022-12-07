@@ -1,11 +1,11 @@
 import dao.BillDAO;
 import dao.ClientDAO;
-import dao.ProductsDAO;
+import dao.ProductDAO;
 import dao.VatDAO;
 
 import object.Bill;
 import object.Client;
-import object.Products;
+import object.Product;
 import object.Vat;
 
 import java.time.LocalDate;
@@ -19,12 +19,12 @@ public class Main {
 
         // Bloc initialisation
         VatDAO vatDAO = new VatDAO();
-        ProductsDAO productsDAO = new ProductsDAO();
+        ProductDAO productDAO = new ProductDAO();
         BillDAO billDAO = new BillDAO();
         ClientDAO clientDAO = new ClientDAO();
-        List<Products> listProductsBill1 = new ArrayList<>();
-        List<Products> listProductsBill2 = new ArrayList<>();
-        List<Products> listProductsBill3 = new ArrayList<>();
+        List<Product> listProductBill1 = new ArrayList<>();
+        List<Product> listProductBill2 = new ArrayList<>();
+        List<Product> listProductBill3 = new ArrayList<>();
         List<Bill> listBillJeanMartin = new ArrayList<>();
         List<Bill> listBillJeanneMartin = new ArrayList<>();
         List<Bill> listBillLait = new ArrayList<>();
@@ -38,8 +38,8 @@ public class Main {
         vatDAO.create(new Vat(0.2));
 
         //Bloc creating objects
-        Products lait = new Products("Lait", 1.24, vatDAO.findById(Long.valueOf(3L)).get());
-        Products chocolat = new Products("Chocolat", 2.48, vatDAO.findById(Long.valueOf(3L)).get());
+        Product lait = new Product("Lait", 1.24, vatDAO.findById(Long.valueOf(3L)).get());
+        Product chocolat = new Product("Chocolat", 2.48, vatDAO.findById(Long.valueOf(3L)).get());
         Bill bill1 = new Bill(LocalDate.now(), 1240L, (1240 * 1.055));
         Bill bill2 = new Bill(LocalDate.now(), 1240L, (1240 * 1.055));
         Bill bill3 = new Bill(LocalDate.now(), 2480, (2480 * 1.055));
@@ -53,12 +53,12 @@ public class Main {
 
         listBillJeanneMartin.add(bill2);
 
-        listProductsBill1.add(lait);
-        listProductsBill1.add(chocolat);
+        listProductBill1.add(lait);
+        listProductBill1.add(chocolat);
 
-        listProductsBill2.add(lait);
+        listProductBill2.add(lait);
 
-        listProductsBill3.add(chocolat);
+        listProductBill3.add(chocolat);
 
         listBillLait.add(bill1);
         listBillLait.add(bill2);
@@ -68,14 +68,14 @@ public class Main {
         //Bloc completing objects
         jeanMartin.setBillList(listBillJeanMartin);
         bill1.setClient(jeanMartin);
-        bill1.setProductByBillList(listProductsBill1);
+        bill1.setProductByBillList(listProductBill1);
 
         jeanneMartin.setBillList(listBillJeanneMartin);
         bill2.setClient(jeanneMartin);
-        bill2.setProductByBillList(listProductsBill2);
+        bill2.setProductByBillList(listProductBill2);
 
         bill3.setClient(jeanMartin);
-        bill3.setProductByBillList(listProductsBill3);
+        bill3.setProductByBillList(listProductBill3);
 
         //Bloc send objects
 

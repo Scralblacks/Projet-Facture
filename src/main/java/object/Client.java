@@ -26,7 +26,7 @@ public class Client {
 
     private String email;
 
-    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.DETACH}, mappedBy = "client")
+    @OneToMany(cascade = {CascadeType.MERGE, CascadeType.REMOVE, CascadeType.DETACH}, mappedBy = "client", fetch = FetchType.EAGER)
     private List<Bill> billList;
 
     public Client(){

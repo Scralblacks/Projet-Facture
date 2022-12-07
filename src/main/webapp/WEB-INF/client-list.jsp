@@ -11,16 +11,6 @@
 
 <h1>Liste des clients</h1>
 
-<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-                   url="jdbc:mysql://localhost:3306/exercicejavase01"
-                   user="root"  password=""/>
-
-<sql:query var="clients" dataSource="${db}">
-  SELECT * FROM client c
-  INNER JOIN bill b
-    ON b.id_client = c.id
-</sql:query>
-
 <table class="table table-client ">
   <thread>
     <tr>
@@ -35,9 +25,9 @@
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="client" items="${clients.rows}">
+  <c:forEach var="client" items="${clients}">
     <tr>
-      <td>${client.ref_nbr}</td>
+      <td>${client.ref_num}</td>
       <td>${client.name}</td>
       <td>${client.address}</td>
       <td>${client.town}</td>
@@ -46,12 +36,12 @@
       <td>${client.email}</td>
       <td>
         <form method="get" action="${pageContext.request.contextPath}/clients/bills">
-          <input type="hidden" value="${client.b.id}" name="idClient">
+          <input type="hidden" value="${client.id}" name="idClient">
           <button class="btn btn-details">Liste des factures</button>
         </form>
       </td>
       <td>
-        <form method="post" action="${pageContext.request.contextPath}/clients/update">
+        <form method="get" action="${pageContext.request.contextPath}/clients/update">
           <input type="hidden" value="${client.id}" name="idClient">
           <button class="btn btn-details">Éditer le(la) client(e)</button>
         </form>

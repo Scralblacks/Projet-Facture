@@ -11,20 +11,10 @@
 
 <h1>Liste des produits</h1>
 
-<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-                   url="jdbc:mysql://localhost:3306/exercicejavase01"
-                   user="root"  password=""/>
-
-<sql:query var="products" dataSource="${db}">
-  SELECT * FROM products p
-  INNER JOIN vat v
-    ON v.id = p.vat_id
-</sql:query>
-
 <table class="table table-product ">
   <thread>
     <tr>
-      <th>Numéro de référence</th>
+<%--      <th>Numéro de référence</th>--%>
       <th>Nom</th>
       <th>Coût hors taxe</th>
       <th>Taxation</th>
@@ -32,12 +22,12 @@
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="product" items="${products.rows}">
+  <c:forEach var="product" items="${products}">
     <tr>
-      <td>${product.ref_nbr}</td>
+<%--      <td>${product.ref_num}</td>--%>
       <td>${product.name}</td>
       <td>${product.price_wto_taxes}</td>
-      <td>${product.amount}</td>
+      <td>${product.vat.amount}</td>
       <td>
         <form method="get" action="${pageContext.request.contextPath}/products/bills">
           <input type="hidden" value="${product.id}" name="idProduct">
@@ -45,7 +35,7 @@
         </form>
       </td>
       <td>
-        <form method="post" action="${pageContext.request.contextPath}/products/update">
+        <form method="get" action="${pageContext.request.contextPath}/products/update">
           <input type="hidden" value="${product.id}" name="idProduct">
           <button class="btn btn-details">Éditer le produit</button>
         </form>

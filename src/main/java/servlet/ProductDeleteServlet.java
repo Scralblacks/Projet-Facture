@@ -1,6 +1,6 @@
 package servlet;
 
-import dao.ProductsDAO;
+import dao.ProductDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,11 +27,11 @@ public class ProductDeleteServlet extends HttpServlet {
 
 
 
-        ProductsDAO productsDao = new ProductsDAO();
+        ProductDAO productDao = new ProductDAO();
 
         System.out.println(Long.parseLong(req.getParameter("idProduct")));
 
-        productsDao.delete(Long.parseLong(req.getParameter("idProduct")));
+        productDao.delete(Long.parseLong(req.getParameter("idProduct")));
 
         resp.sendRedirect(ListProductServlet.URL);
     }

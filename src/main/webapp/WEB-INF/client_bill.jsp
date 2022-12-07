@@ -11,19 +11,10 @@
 
 <h1>Liste des clients</h1>
 
-<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-                   url="jdbc:mysql://localhost:3306/exercicejavase01"
-                   user="root"  password=""/>
-
-<sql:query var="clients" dataSource="${db}">
-  SELECT * FROM client
-    WHERE id = ${idClient}
-</sql:query>
-
 <table class="table table-client ">
   <thread>
     <tr>
-      <th>Numéro de référence</th>
+<%--      <th>Numéro de référence</th>--%>
       <th>Nom</th>
       <th>Adresse</th>
       <th>Ville</th>
@@ -34,9 +25,9 @@
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="client" items="${clients.rows}">
+  <c:forEach var="bill" items="${client.billList}">
     <tr>
-      <td>${client.ref_nbr}</td>
+<%--      <td>${client.ref_nbr}</td>--%>
       <td>${client.name}</td>
       <td>${client.address}</td>
       <td>${client.town}</td>
