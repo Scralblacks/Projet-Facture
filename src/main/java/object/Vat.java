@@ -2,7 +2,6 @@ package object;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -14,27 +13,27 @@ public class Vat {
     private double amount;
 
     @OneToMany(mappedBy = "vat")
-    private List<Products> productsList;
+    private List<Product> productList;
 
-    public void setProductsList(List<Products> productsList) {
-        this.productsList = productsList;
+    public void setProductsList(List<Product> productList) {
+        this.productList = productList;
     }
 
     public Vat(){
 
     }
 
-    public Vat(double amount, List<Products> productsList) {
+    public Vat(double amount, List<Product> productList) {
         this.amount = amount;
-        this.productsList = productsList;
+        this.productList = productList;
     }
 
     public Vat(double amount) {
         this.amount = amount;
     }
 
-    public List<Products> getProductsList() {
-        return productsList;
+    public List<Product> getProductsList() {
+        return productList;
     }
 
     public void setId(Long id) {

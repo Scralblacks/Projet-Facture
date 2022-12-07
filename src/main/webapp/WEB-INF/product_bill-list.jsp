@@ -11,21 +11,6 @@
 
 <h1>Liste des produits</h1>
 
-<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-                   url="jdbc:mysql://localhost:3306/exercicejavase01"
-                   user="root"  password=""/>
-
-<sql:query var="products" dataSource="${db}">
-  SELECT * FROM products p
-  INNER JOIN vat v
-    ON v.id = p.vat_id
-  INNER JOIN billproduct bp
-    ON p.id = bp.id_product
-  INNER JOIN bill b
-    ON bp.id_bill = b.id
-    WHERE b.id = ${idBill}
-</sql:query>
-
 <table class="table table-product ">
   <thread>
     <tr>
@@ -37,21 +22,36 @@
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="product" items="${products.rows}">
-    <tr>
-      <td>${product.ref_nbr}</td>
-      <td>${product.name}</td>
-      <td>${product.price_wto_taxes}</td>
-      <td>${product.quantityProduct}</td>
-      <td>${product.amount}</td>
-      <td>
-        <form method="get" action="${pageContext.request.contextPath}/products/bills">
-          <input type="hidden" value="${product.id}" name="idProduct">
-          <button class="btn btn-details">Liste des Factures</button>
-        </form>
-      </td>
-    </tr>
+<c:forEach var="product" items="${products}">
+  <c:forEach var="bill" items="${product.billByProductList}">
+    <c:if test="${bill.id == idBill}">
+      <tr>
+          <%--      <td>${product.ref_num}</td>--%>
+        <td>${product.name}</td>
+        <td>${product.price_wto_taxes}</td>
+        <td>${product.vat.amount}</td>
+        <td>
+          <form method="get" action="${pageContext.request.contextPath}/products/bills">
+            <input type="hidden" value="${product.id}" name="idProduct">
+            <button class="btn btn-details">Liste des Factures</button>
+          </form>
+        </td>
+        <td>
+          <form method="post" action="${pageContext.request.contextPath}/products/update">
+            <input type="hidden" value="${product.id}" name="idProduct">
+            <button class="btn btn-details">Éditer le produit</button>
+          </form>
+        </td>
+        <td>
+          <form method="post" action="${pageContext.request.contextPath}/products/delete">
+            <input type="hidden" value="${product.id}" name="idProduct">
+            <button class="btn btn-details">Supprimer le produit</button>
+          </form>
+        </td>
+      </tr>
+  </c:if>
   </c:forEach>
+</c:forEach>
   </tbody>
 </table>
 

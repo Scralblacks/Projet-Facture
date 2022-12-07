@@ -1,5 +1,6 @@
 package servlet;
 
+import dao.BillDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -16,13 +17,12 @@ public class ListBillServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        BillDAO billDAO = new BillDAO();
+
+        req.setAttribute("bills", billDAO.findAll());
+
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/bill-list.jsp");
         rd.forward(req, resp);
-
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
     }
 }

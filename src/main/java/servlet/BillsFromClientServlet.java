@@ -1,5 +1,7 @@
 package servlet;
 
+import dao.BillDAO;
+import dao.ClientDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -17,7 +19,13 @@ public class BillsFromClientServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
+        BillDAO billDAO = new BillDAO();
+        ClientDAO clientDAO = new ClientDAO();
+
         req.setAttribute("idClient", req.getParameter("idClient"));
+        req.setAttribute("bills", billDAO.findAll());
+
+        System.out.println(clientDAO.findById(Long.parseLong(req.getParameter("idClient"))));
 
         RequestDispatcher rd = req.getRequestDispatcher("/WEB-INF/bill_client-list.jsp");
         rd.forward(req, resp);

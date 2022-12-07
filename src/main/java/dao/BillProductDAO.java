@@ -4,22 +4,22 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.TypedQuery;
-import object.Products;
+import object.BillProduct;
 import util.PersistantManager;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-public class ProductsDAO implements CrudDAO<Products> {
-    public List<Products> findAll() {
-        List<Products> listResult = new ArrayList<>();
+public class BillProductDAO implements CrudDAO<BillProduct>{
+    public List<BillProduct> findAll() {
+        List<BillProduct> listResult = new ArrayList<>();
         EntityManagerFactory emf = PersistantManager.getFactoryInstance();
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            TypedQuery<Products> query = em.createQuery("SELECT p FROM Products p", Products.class);
+            TypedQuery<BillProduct> query = em.createQuery("SELECT bp FROM BillProduct bp", BillProduct.class);
             listResult = query.getResultList();
             et.commit();
         } catch (Exception e){
@@ -33,14 +33,14 @@ public class ProductsDAO implements CrudDAO<Products> {
     }
 
     @Override
-    public Optional<Products> findById(Long id) {
-        Optional<Products> result;
+    public Optional<BillProduct> findById(Long id) {
+        Optional<BillProduct> result;
         EntityManagerFactory emf = PersistantManager.getFactoryInstance();
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            result = Optional.of(em.find(Products.class, id));
+            result = Optional.of(em.find(BillProduct.class, id));
             et.commit();
             return result;
         } catch (Exception e){
@@ -53,26 +53,6 @@ public class ProductsDAO implements CrudDAO<Products> {
         return Optional.empty();
     }
 
-    public List<Products> findByName(String name) {
-        List<Products> result = null;
-        EntityManagerFactory emf = PersistantManager.getFactoryInstance();
-        EntityManager em = emf.createEntityManager();
-        EntityTransaction et = em.getTransaction();
-        try {
-            et.begin();
-            TypedQuery<Products> query = em.createQuery("SELECT p FROM Products p WHERE p.name = ?1", Products.class);
-            result = query.setParameter(1, name).getResultList();
-            et.commit();
-        } catch (Exception e){
-            if (et.isActive()){
-                et.rollback();
-            }
-        } finally {
-            em.close();
-        }
-        return result;
-    }
-
     @Override
     public boolean delete(Long id) {
         EntityManagerFactory emf = PersistantManager.getFactoryInstance();
@@ -80,7 +60,7 @@ public class ProductsDAO implements CrudDAO<Products> {
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            em.remove(em.find(Products.class, id));
+            em.remove(em.find(BillProduct.class, id));
             et.commit();
             return true;
         } catch (Exception e){
@@ -94,7 +74,7 @@ public class ProductsDAO implements CrudDAO<Products> {
     }
 
     @Override
-    public Products update(Products element) {
+    public BillProduct update(BillProduct element) {
         EntityManagerFactory emf = PersistantManager.getFactoryInstance();
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
@@ -113,13 +93,13 @@ public class ProductsDAO implements CrudDAO<Products> {
     }
 
     @Override
-    public Products create(Products element) {
+    public BillProduct create(BillProduct element) {
         EntityManagerFactory emf = PersistantManager.getFactoryInstance();
         EntityManager em = emf.createEntityManager();
         EntityTransaction et = em.getTransaction();
         try {
             et.begin();
-            em.merge(element);
+            em.persist(element);
             et.commit();
         } catch (Exception e){
             e.getMessage();

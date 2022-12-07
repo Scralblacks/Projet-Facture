@@ -11,14 +11,6 @@
 
 <h1>Liste des factures</h1>
 
-<sql:setDataSource var="db" driver="com.mysql.jdbc.Driver"
-                   url="jdbc:mysql://localhost:3306/exercicejavase01"
-                   user="root"  password=""/>
-
-<sql:query var="bills" dataSource="${db}">
-  SELECT * FROM bill
-</sql:query>
-
 <table class="table table-bill table-bill_client ">
   <thread>
     <tr>
@@ -30,15 +22,15 @@
     </tr>
   </thread>
   <tbody>
-  <c:forEach var="bill" items="${bills.rows}">
+  <c:forEach var="bill" items="${bills}">
     <tr>
-      <td>${bill.ref_nbr}</td>
+      <td>${bill.ref_num}</td>
       <td>${bill.cost_wto_taxes}</td>
       <td>${bill.cost_wt_taxes}</td>
       <td>${bill.date_of_creation}</td>
       <td>
         <form method="get" action="${pageContext.request.contextPath}/bills/client">
-          <input type="hidden" value="${bill.client_id}" name="idClient">
+          <input type="hidden" value="${bill.client.id}" name="idClient">
           <button class="btn btn-details">Detail du client</button>
         </form>
       </td>
@@ -49,7 +41,7 @@
         </form>
       </td>
       <td>
-        <form method="post" action="${pageContext.request.contextPath}/bills/update">
+        <form method="get" action="${pageContext.request.contextPath}/bills/update">
           <input type="hidden" value="${bill.id}" name="idBill">
           <button class="btn btn-details">Éditer la facture</button>
         </form>

@@ -3,7 +3,6 @@ package object;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
-import java.util.Collection;
 import java.util.List;
 
 @Entity
@@ -11,6 +10,8 @@ public class Bill {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    private String ref_num;
 
     private LocalDate date_of_creation;
 
@@ -23,16 +24,17 @@ public class Bill {
     @ManyToOne(cascade = {CascadeType.MERGE, CascadeType.DETACH})
     private Client client;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE})
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE}, fetch = FetchType.EAGER)
     @JoinTable(name = "billproduct", joinColumns = @JoinColumn(name = "id_Bill", referencedColumnName="ID"),
             inverseJoinColumns = @JoinColumn(name = "id_Product", referencedColumnName="ID"))
-    private List<Products> productByBillList;
+    private List<Product> productByBillList;
 
     public Bill(){
 
     }
 
-    public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes, Client client, List<Products> productByBillList){
+    public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes, Client client, List<Product> productByBillList){
+        this.ref_num = "B" + this.getId();
         this.date_of_creation = date_of_creation;
         this.cost_wto_taxes = cost_wto_taxes;
         this.cost_wt_taxes = cost_wt_taxes;
@@ -41,6 +43,7 @@ public class Bill {
     }
 
     public Bill(LocalDate date_of_creation, double cost_wto_taxes, double cost_wt_taxes, Client client){
+        this.ref_num = "B" + this.getId();
         this.date_of_creation = date_of_creation;
         this.cost_wto_taxes = cost_wto_taxes;
         this.cost_wt_taxes = cost_wt_taxes;
@@ -85,7 +88,7 @@ public class Bill {
         this.cost_wt_taxes = cost_wt_taxes;
     }
 
-    public void setProductList(List<Products> productByBillList) {
+    public void setProductList(List<Product> productByBillList) {
         this.productByBillList = productByBillList;
     }
 
@@ -97,11 +100,19 @@ public class Bill {
         this.client = client;
     }
 
-    public void setProductByBillList(List<Products> productByBillList) {
+    public void setProductByBillList(List<Product> productByBillList) {
         this.productByBillList = productByBillList;
     }
 
-    public List<Products> getProductByBillList() {
+    public List<Product> getProductByBillList() {
         return productByBillList;
+    }
+
+    public String getRef_num() {
+        return ref_num;
+    }
+
+    public void setRef_num(String ref_num) {
+        this.ref_num = ref_num;
     }
 }

@@ -2,16 +2,15 @@ package object;
 
 import jakarta.persistence.*;
 
-import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Products {
+public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String ref_nbr;
+    private String ref_num;
 
     private String name;
 
@@ -20,23 +19,23 @@ public class Products {
     @ManyToOne
     private Vat vat;
 
-    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE}, mappedBy = "productByBillList")
+    @ManyToMany(cascade = {CascadeType.MERGE, CascadeType.DETACH, CascadeType.REMOVE}, mappedBy = "productByBillList", fetch = FetchType.EAGER)
     private List<Bill> billByProductList;
 
-    public Products(){
+    public Product(){
 
     }
 
-    public Products(String name, double price_wto_taxes, Vat vat, List<Bill> billByProductList){
-        this.ref_nbr = "P" + this.getId();
+    public Product(String name, double price_wto_taxes, Vat vat, List<Bill> billByProductList){
+        this.ref_num = "P" + this.getId();
         this.name = name;
         this.price_wto_taxes = price_wto_taxes;
         this.vat = vat;
         this.billByProductList = billByProductList;
     }
 
-    public Products(String name, double price_wto_taxes, Vat vat){
-        this.ref_nbr = "P" + this.getId();
+    public Product(String name, double price_wto_taxes, Vat vat){
+        this.ref_num = "P" + this.getId();
         this.name = name;
         this.price_wto_taxes = price_wto_taxes;
         this.vat = vat;
